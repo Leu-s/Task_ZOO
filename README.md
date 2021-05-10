@@ -1,1 +1,1 @@
-![](https://github.com/Leu-s/Task_ZOO/zoo.png)
+![](https://github.com/Leu-s/zoo.png)
