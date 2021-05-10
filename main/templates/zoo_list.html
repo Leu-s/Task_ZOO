@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+    {% for zoo in zoos %}
+            <div class="main-zoo">
+                <p><span class="D-row">Name</span>: <a href="{% url 'zoo' zoo.pk %}">{{ zoo }}</a></p>
+                <p><span class="D-row">Area</span>: {{ zoo.total_area }} {{ zoo.unit }}</p>
+                <p><span class="D-row">Aviaries</span>: {{ zoo.aviaries.all | length }}
+                </p>
+            </div>
+    {% endfor %}
+{% endblock %}

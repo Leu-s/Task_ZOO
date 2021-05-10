@@ -1,0 +1,208 @@
+{% extends 'index.html' %}
+
+{% block title %}{{ zoo.title }}{% endblock %}
+
+{% block content %}
+    <div class="zoo-block">
+        <div>
+            <div class="zoo-mainInfo" id="{{ zoo.pk }}">
+                <h4>Main information</h4>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><span class="text-bold">Title: </span></td>
+                            <td>{{ zoo.title }}</td>
+                        </tr>
+                        <tr>
+                            <td><span class="text-bold">Area:</span></td>
+                            <td><span  id="zooTotalArea">{{ zoo.total_area }}</span>
+                                {% if a.unit == 'm2' %}
+                                    m²
+                                {% else %}
+                                    km²
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="text-bold">Free area:</span></td>
+                            <td><span id="zooFreeArea">{{ zoo.free_area }}</span>
+                                {% if a.unit == 'm2' %}
+                                    m²
+                                {% else %}
+                                    km²
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="text-bold">Number of aviary:</span></td>
+                            <td>{{ zoo.aviaries.all | length }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="mainInfo-av-table">
+                    <tbody>
+                        <tr>
+                            <td><span class="text-bold">Animals</span></td>
+                            <td><span class="text-bold">Amount</span></td>
+                        </tr>
+                        {% for a in zoo.aviaries.all %}
+                            <tr class="mainTable-row">
+                                <td class="zooAmountAnimals-type">{{ a.typeOfAnimals }}</td>
+                                <td class="zooAmountAnimals-value">{{ a.amount_animals }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="SaveChanges">
+                    <span id="token">{% csrf_token %}</span>
+                    <button id="SaveBtn" value="{% url 'zoo-update' %}" type="button">Save changes</button>
+                </div>
+
+                <div class="ZooAreaChart-div">
+                    <canvas id="ZooAreaChart"></canvas>
+                </div>
+
+            </div>
+    </div>
+        <div class="zoo-aviary">
+            <h4>List of aviary with animals</h4>
+            {% for a in zoo.aviaries.all %}
+                <div class="av-info">
+                    <table>
+                        <tbody>
+                            <tr><td><span class="text-bold">Type:</span></td>
+                                <td class="animalsType">{{ a.typeOfAnimals }}</td>
+                            </tr>
+                            <tr>
+                                <td><span class="text-bold">Living space:</span></td>
+                                <td><span class="living-space">{{ a.required_area }}</span>
+                                    {% if a.unit == 'm2' %}
+                                        m²
+                                    {% else %}
+                                        km²
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="text-bold">Number of animals:</span></td>
+                                <td>
+                                    <form>
+                                        <label for="num-animals">
+                                            <input
+                                                    class="av-amount-animals"
+                                                    type="number"
+                                                    name="num-animals"
+                                                    value="{{ a.amount_animals }}"
+                                                    step="1"
+                                                    min="0"
+                                                    max="0">
+                                        </label>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="text-bold">Total area:</span></td>
+                                <td >
+                                    <form>
+                                        <label for="aviaryTotalArea-counter">
+                                            <input  class="Av-total-area"
+                                                    type="number"
+                                                    name="aviaryTotalArea-counter"
+                                                    value="{{ a.total_area }}"
+                                                    step="10000"
+                                                    min="0" max="0">
+                                            {% if a.unit == 'm2' %}
+                                                m²
+                                            {% else %}
+                                                km²
+                                            {% endif %}
+                                        </label>
+                                    </form>
+                                </td>
+                                <td></td>
+                            </tr>
+{#                                {{ a.total_area }} {{ a.unit }} {{ a.get_unit_display}#}
+                            <tr>
+                                <td><span class="text-bold">Free area:</span></td>
+                                <td>
+                                    <span class="av-free-area">{{ a.free_area }}</span>
+                                    {% if a.unit == 'm2' %}
+                                        m²
+                                    {% else %}
+                                        km²
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="text-bold">Occupied place:</span></td>
+                                <td>
+                                    <span class="av-oc-place">{{ a.occupied_place }}</span>
+                                    {% if a.unit == 'm2' %}
+                                        m²
+                                    {% else %}
+                                        km²
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="aviaryChartArea-div">
+                        <canvas class="ChartsInAv" id="aviaryChartArea-id{{ a.pk }}" width="200" height="200"></canvas>
+                    </div>
+                    <div class="aviaryChartPlaces-div">
+                        <canvas class="ChartInAv-places" id="avChartPlaces-id{{ a.pk }}" width="200" height="200"></canvas>
+                    </div>
+                </div>
+             {% endfor %}
+        </div>
+
+        <div class="adAviaryForm-div">
+            <form method="post" id="createAv" action="{% url 'zoo' zoo.pk %}">
+                {% csrf_token %}
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="text-bold">Type</td>
+                            <td class="text-bold">Required area</td>
+                            <td class="text-bold">Total area</td>
+                            <td class="text-bold"><span class="text-bold" style="color: green">Add</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="newAvType">
+                                   <select name="newAvType" size="1" required>
+                                        <option disabled>Choose an animal</option>
+                                        {% for type in animalTypes %}
+                                            <option>{{ type }}</option>
+                                        {% endfor %}
+                                   </select>
+                                </label>
+                            </td>
+                            <td>
+                                <label for=newAvReqArea"">
+                                    <label for="newAvReqArea">
+                                        <input  class="newAvReqArea" type="number" name="newAvReqArea"
+                                                value="0" step="1" min="1" max="100"> m²
+                                    </label>
+                                </label>
+                            </td>
+                            <td>
+                               <label for=newAvTotalArea"">
+                                    <label for="newAvTotalArea">
+                                        <input  class="newAvTotalArea" type="number" name="newAvTotalArea"
+                                                value="0" step="100" min="50" max="0"> m²
+                                    </label>
+                                </label>
+                            </td>
+                            <td>
+                                <input type="submit" name="createAv" value="Create">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+
+    </div>
+{% endblock %}
+

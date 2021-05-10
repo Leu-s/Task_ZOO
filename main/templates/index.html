@@ -1,0 +1,36 @@
+{% load static %}
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}ZOO{% endblock %} - main</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/zoo_list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/zoo_view.css' %}">
+
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>My<span>ZOO</span></h1>
+        </div>
+        <div class="menu">
+            <p class="menu-btn" id="main-btn"><a href="{% url 'index' %}">Main</a></p>
+            <p class="menu-btn"><a href="{% url 'create-zoo' %}">Create new zoo</a></p>
+            <p class="menu-btn" id="task-btn"><a href="{% url 'task-info' %}">Task</a></p>
+        </div>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+
+{% bootstrap_javascript jquery='full' %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> {# Chart.js library #}
+<script src="{% static 'js/zoo_view.js' %}"></script>
+<script src="{% static 'js/zoo_view_update.js' %}"></script>
+
+</html>

@@ -1,0 +1,14 @@
+.main-zoo {
+    border: dashed forestgreen 3px;
+    border-radius: 10px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.main-zoo > p {
+    margin-left: 15px;
+}
+
+.D-row {
+    font-weight: bold;
+}

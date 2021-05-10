@@ -1,0 +1,146 @@
+.zoo-block {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+
+/*Left block with main information*/
+.zoo-mainInfo {
+    width: 250px;
+    height: 0%;
+    border: solid 2px silver;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.zoo-mainInfo > h4 {
+    text-align: center;
+    border-bottom: solid silver 1px;
+    margin-top: 0;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+.mainInfo-av-table {
+    width: 100%;
+    border-collapse: collapse;
+
+}
+.mainInfo-av-table > tbody > tr > td {
+    border: solid #C0C0C0 1px;
+    width: 50%;
+    text-align: center;
+}
+
+
+/*Block with aviaries list*/
+.zoo-aviary > h4 {
+    text-align: center;
+    border: 2px solid #FFA07A;
+    border-bottom: 0;
+    border-radius: 5px 5px 0 0;
+
+    margin-top: 0;
+    padding-top: 5px;
+    margin-bottom: 5px;
+
+}
+
+.zoo-aviary {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 750px;
+    min-width: 750px;
+}
+
+.av-info {
+    border: #50C878 solid 2px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.av-info > table > tr {
+    width: 100%;
+}
+
+.av-info > table > tbody > tr > td {
+    table-layout: fixed;
+
+}
+.av-amount-animals {
+    width: 100px;
+}
+.Av-total-area {
+    width: 100px;
+}
+.input-forms {
+    width: 70px;
+}
+
+/*Add aviary form*/
+.adAviaryForm-div {
+    margin-left: 15px;
+    width: 100%;
+    min-width: 620px;
+    border: #F4CA16 solid 2px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+
+
+.adAviaryForm-div > form > table  {
+    width: 100%;
+    table-layout: fixed;
+    text-align: center;
+}
+
+.adAviaryForm-div > form > table > tbody > tr > td {
+    width: 100%;
+}
+
+
+/*Save changes btn */
+.SaveChanges {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+}
+#SaveBtn {
+    width: 100%;
+    height: 50px;
+    background-color: #00D953;
+    border-radius: 5px;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+}
+
+#SaveBtn:active {
+    transition: .1s;
+    background-color: #318CE7;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

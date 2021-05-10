@@ -1,0 +1,90 @@
+body {
+    margin: 25px;
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+.logo > h1 {
+    font-size: 50px;
+    color: #161616;
+}
+.logo > h1 > span {
+    color: forestgreen;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    border: solid 2px #161616;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.menu-btn {
+    width: 100px;
+    text-align: center;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #00D953;
+    transition: .2s;
+}
+
+.menu-btn > a {
+    text-decoration: none;
+    color: white;
+}
+
+.menu-btn:hover {
+    transition: .2s;
+    background-color: dodgerblue;
+}
+
+#main-btn {
+    background-color: lightsalmon;
+    transition: .2s;
+}
+
+#main-btn:hover {
+    background-color: dodgerblue;
+    transition: .2s;
+}
+
+#task-btn {
+    background-color: #F4CA16;
+    transition: .2s;
+}
+#task-btn:hover {
+    background-color: dodgerblue;
+    transition: .2s;
+}
+
+
+/* MAIN */
+
+main {
+    padding-top: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
